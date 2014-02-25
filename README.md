@@ -26,7 +26,7 @@ pages.get("/", function(req, res){
 
 ### Add a blueprint to your app
 
-```
+```js
 var express = require('express');
 var app = express();
 
@@ -56,7 +56,7 @@ Then run the tests:
 
 Create a blueprint
 
-```
+```js
 var blueprint = require("express-blueprint");
 var pages = blueprint();
 ```
@@ -68,7 +68,8 @@ This blueprint accepts the following options:
 ### `pages.register(app [,options])`
 
 Register your blueprint like this:
-```
+
+```js
 blueprint = require("./index.js");
 express = require("express");
 
@@ -87,7 +88,7 @@ pages.register(app);
 
 If you check the rules registered on the application, you will find these:
 
-```
+```js
 console.log(app.routes);
 { get: 
    [ { path: '/pages/page1',
