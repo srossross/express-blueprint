@@ -7,30 +7,38 @@ Blueprints can greatly simplify how large applications work and provide a centra
 A Blueprint object works similarly to a Express application object, but it is not actually an application. 
 Rather it is a blueprint of how to construct or extend an application.
 
-### Express Blueprints
+### Define a Blueprints
 
 ```js
-blueprint = require("express-blueprint");
+var blueprint = require("express-blueprint");
 
-blue = blueprint();
+var pages = blueprint();
 
-blue.configure(function(app){
+pages.configure(function(app){
     // Some Config here!
 });
 
-blue.use(some_middleware);
+pages.use(some_middleware);
 
-blue.get("/", function(req, res){
-    
+pages.get("/", function(req, res){
     res.send("Hello Blueprints!");
 });
 ```
 
+### Add a blueprint to your app
 
+```
+var express = require('express');
+var app = express();
+
+pages.register(app);
+
+app.listen(8080);
+```
 
 ### Installation
 
-    $ npm install -g express-blueprint
+    $ npm install express-blueprint
     
 ### Running Tests
 
@@ -41,3 +49,35 @@ To run the test suite, first invoke the following command within the repo, insta
 Then run the tests:
 
     $ npm test
+    
+    
+# API
+
+### `app.configure([env], callback)`
+
+Conditionally invoke callback when `env` matches `app.get('env')`, aka `process.env.NODE_ENV`. 
+
+```js
+// all environments
+pages.configure(function(app){
+  app.set("value', 'I've configured a blueprint!");
+})
+
+// development only
+app.configure('development', function(){
+  app.set("value', 'I've configured a blueprint!");
+})
+
+// production only
+app.configure('production', function(){
+  app.set("value', 'I've configured a blueprint!");
+})
+```
+
+
+# License
+
+(The MIT License)
+
+
+
