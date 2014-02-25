@@ -53,7 +53,21 @@ Then run the tests:
     
 # API
 
-### `app.configure([env], callback)`
+### `bluprint(options)`
+
+Create a blueprint
+
+```
+var blueprint = require("express-blueprint");
+var pages = blueprint();
+```
+
+This blueprint accepts the following options:
+
+*   `urlPrefix`: Mounte the blueprint at a different location. see [this example](https://github.com/srossross/express-blueprint/blob/master/examples/urlPrefix.js) for more details.
+
+
+### `pages.configure([env], callback)`
 
 Conditionally invoke callback when `env` matches `app.get('env')`, aka `process.env.NODE_ENV`. 
 
@@ -74,6 +88,47 @@ app.configure('production', function(){
 })
 ```
 
+### `pages.use(function)`
+
+Use the given middleware function.
+
+```js
+var blueprint = require('express-blueprint');
+var pages = blueprint();
+
+// simple logger
+pages.use(function(req, res, next){
+  console.log('%s %s', req.method, req.url);
+  next();
+});
+
+// respond
+pages.use(function(req, res, next){
+  res.send('Hello World');
+});
+
+```
+
+### `pages.VERB(path, [callback...], callback)`
+
+See [express api for more details](http://expressjs.com/api.html#app.VERB)
+ 
+```js
+pages.get('/', function(req, res){
+  res.send('hello world');
+});
+
+```
+
+### `pages.locals`
+
+Bluprint local variables are provided to all templates rendered within the blueprint. 
+This is useful for providing helper functions to templates, as well as app-level data.
+
+```js
+pages.locals.title = 'My App';
+pages.locals.strftime = require('strftime');
+```
 
 # License
 
