@@ -118,7 +118,12 @@ blueprint.prototype._record = function(method, path, callbacks, callback){
 
 
 
-blueprint.prototype.register = function(app) {
+blueprint.prototype.register = function(app, options) {
+    
+    if (options){
+        _extend(this.options, options); 
+    }
+    
     this.configure_records.forEach(function(callback){
         callback(app);
     });
