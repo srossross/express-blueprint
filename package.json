@@ -1,6 +1,6 @@
 {
   "name": "express-blueprints",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Modular Express Apps",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "express": "~3.4.8"
   },
   "devDependencies": {
     "mocha": "~1.17.1",
