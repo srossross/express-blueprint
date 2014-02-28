@@ -1,4 +1,3 @@
-
 # Modular Applications with Express Blueprints 
 
 
@@ -27,7 +26,7 @@ pages.get("/", function(req, res){
 
 ### Add a blueprint to your app
 
-```
+```js
 var express = require('express');
 var app = express();
 
@@ -57,7 +56,7 @@ Then run the tests:
 
 Create a blueprint
 
-```
+```js
 var blueprint = require("express-blueprint");
 var pages = blueprint();
 ```
@@ -66,6 +65,43 @@ This blueprint accepts the following options:
 
 *   `urlPrefix`: Mounte the blueprint at a different location. see [this example](https://github.com/srossross/express-blueprint/blob/master/examples/urlPrefix.js) for more details.
 
+### `pages.register(app [,options])`
+
+Register your blueprint like this:
+
+```js
+blueprint = require("./index.js");
+express = require("express");
+
+pages = blueprint({urlPrefix: "/pages"});
+
+pages.get("/page1", function(req, res){
+    res.send("Hello blue1");
+});
+pages.get("/page2", function(req, res){
+    res.send("Hello blue1");
+});
+
+app = express();
+pages.register(app);
+```
+
+If you check the rules registered on the application, you will find these:
+
+```js
+console.log(app.routes);
+{ get: 
+   [ { path: '/pages/page1',
+       method: 'get',
+       callbacks: [Object],
+       keys: [],
+       regexp: /^\/pages\/page1\/?$/i },
+     { path: '/pages/page2',
+       method: 'get',
+       callbacks: [Object],
+       keys: [],
+       regexp: /^\/pages\/page2\/?$/i } ] }
+```
 
 ### `pages.configure([env], callback)`
 
