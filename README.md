@@ -111,17 +111,17 @@ Conditionally invoke callback when `env` matches `app.get('env')`, aka `process.
 // all environments
 pages.configure(function(app){
   app.set("value', 'I've configured a blueprint!");
-})
+});
 
 // development only
-app.configure('development', function(){
+pages.configure('development', function(app){
   app.set("value', 'I've configured a blueprint!");
-})
+});
 
 // production only
-app.configure('production', function(){
+pages.configure('production', function(app){
   app.set("value', 'I've configured a blueprint!");
-})
+});
 ```
 
 ### `pages.use(function)`
